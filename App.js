@@ -29,6 +29,12 @@ export default class App extends React.Component {
   state = {
     decks: null
   }
+  constructor(props) {
+    super(props)
+
+    this.createDeck = this.createDeck.bind(this)
+    this.createQuestion = this.createQuestion.bind(this)
+  }
   async componentDidMount() {
     const value = await AsyncStorage.getItem('decks')
     const decks = value ? JSON.parse(value) : initialData
@@ -67,8 +73,8 @@ export default class App extends React.Component {
     return decks
       ? <Stack screenProps={{
           decks,
-          createDeck: this.createDeck.bind(this),
-          createQuestion: this.createQuestion.bind(this),
+          createDeck: this.createDeck,
+          createQuestion: this.createQuestion,
         }} />
       : <ActivityIndicator />
   }

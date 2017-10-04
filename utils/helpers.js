@@ -10,16 +10,16 @@ export async function scheduleNotification() {
     if (permission.status = 'granted') {
       await Notifications.cancelAllScheduledNotificationsAsync()
 
-      const tomorrow = new Date()
-      tomorrow.setDate(tomorrow.getDate() + 1)
-      tomorrow.setHours(20)
-      tomorrow.setMinutes(0)
+      const time = new Date()
+      time.setSeconds(time.getSeconds() + 10)
+      // the notification will show in 10 seconds
+      // you need to minimize the app, otherwise it doesn't trigger the notification
 
       const notificationId = await Notifications.scheduleLocalNotificationAsync({
         'title': 'FlashCards',
         'body': 'You need to study everyday!'
       }, {
-        time: tomorrow,
+        time,
         repeat: 'day'
       })
 
